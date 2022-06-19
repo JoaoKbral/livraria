@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LivroController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::resource('livros', LivroController::class);
 
+// Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
