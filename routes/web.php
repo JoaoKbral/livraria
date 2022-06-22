@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+# Parte livro
 Route::resource('livros', LivroController::class);
+Route::any('/livros/search',[LivroController::class,'search'])->name('livros.search');
 
 // Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
