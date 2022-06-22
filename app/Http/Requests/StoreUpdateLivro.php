@@ -13,7 +13,7 @@ class StoreUpdateLivro extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreUpdateLivro extends FormRequest
     public function rules()
     {
         return [
-            //
+            'titulo'=>'required | max:100 | min:3',
+            'isbn' => 'required | max:13 | min:10',
+            'ano' => 'required | Integer',
+            'idioma' => 'required | min:5'
         ];
     }
 }
