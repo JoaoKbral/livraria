@@ -269,36 +269,73 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
+                    'text' => 'Livro',
                     'submenu' => [
                         [
-                            'text' => 'level_two',
-                            'url'  => '#',
+                            'text' => 'Index',
+                            'route' => 'livros.index'
                         ],
                         [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
+                            'text' => 'Criar livro',
+                            'route' => 'livros.create'
+                        ],
+                        [
+                            'text' => 'Ver livro',
+                            'url'=>'{$id}',
+                            'route' => 'livros.show'
+                        ],
+                        [
+                            'text' => 'Editar livro',
+                            'url'=>'{$id}',
+                            'route' => 'livros.edit'
                         ],
                     ],
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text'    => 'Editora',
+                    'submenu' => [
+                        [
+                            'text' => 'Index',
+                            'route' => 'editoras.index'
+                        ],
+                        [
+                            'text' => 'Criar',
+                            'route' => 'editoras.create'
+                        ],
+                        [
+                            'text' => 'Ver',
+                            'url'=>'{$id}',
+                            'route' => 'editoras.show'
+                        ],
+                        [
+                            'text' => 'Editar',
+                            'url'=>'{$id}',
+                            'route' => 'editoras.edit'
+                        ]
+                    ],
+                ],
+                [
+                    'text' => 'Autores',
+                    'submenu' => [
+                        [
+                            'text' => 'Index',
+                            'route' => 'autores.index'
+                        ],
+                        [
+                            'text' => 'Criar',
+                            'route' => 'autores.create'
+                        ],
+                        [
+                            'text' => 'Ver',
+                            'url'=>'{$id}',
+                            'route' => 'autores.show'
+                        ],
+                        [
+                            'text' => 'Editar',
+                            'url'=>'{$id}',
+                            'route' => 'autores.edit'
+                        ],
+                    ],
                 ],
             ],
         ],

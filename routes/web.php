@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AutoresController;
+use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivroController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,12 @@ Route::get('/', function () {
 # Parte livro
 Route::resource('livros', LivroController::class);
 Route::any('/livros/search',[LivroController::class,'search'])->name('livros.search');
+
+Route::resource('editoras',EditorasController::class);
+Route::any('/editoras/search',[EditorasController::class,'search'])->name('livros.search');
+
+Route::resource('autores',AutoresController::class);
+Route::any('/autores/search',[AutoresController::class,'search'])->name('livros.search');
 
 // Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
