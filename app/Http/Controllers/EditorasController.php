@@ -16,17 +16,17 @@ class EditorasController extends Controller
      */
     public function index()
     {
-        $editoras = Editoras::orderBy('titulo')->paginate(5);
-        return view('editoras.index', compact('editoras'));
+        $editora = Editoras::orderBy('titulo')->paginate(5);
+        return view('editoras.index', compact('editora'));
     }
 
     public function search(Request $request)
     {
         $filters = $request->except('_token');
-        $editoras = Editoras::where('titulo', 'LIKE', "%request->search%")
+        $editora = Editoras::where('titulo', 'LIKE', "%request->search%")
             ->orWhere('idioma', 'LIKE', "%request->search%")
             ->paginate(5);
-        return view('editoras.index', compact('editoras', 'filters'));
+        return view('editoras.index', compact('editora', 'filters'));
     }
 
     /**
@@ -53,9 +53,9 @@ class EditorasController extends Controller
             $image = $request->capa->storeAs('editora', $nameFile);
             $data['capa'] = $image;
             Editoras::create('$data');
-            return redirect()->route('editora.index');
+            return redirect()->route('editoras.index');
         } else {
-            return redirect()->route('editora.index')->with('message', 'Arquivo de imagem invalido');
+            return redirect()->route('editoras.index')->with('message', 'Arquivo de imagem invalido');
         }
     }
 
@@ -70,10 +70,10 @@ class EditorasController extends Controller
         $editora = Editoras::find($id);
         if (!$editora) {
             return redirect()
-                ->route('editora.index')
+                ->route('editoras.index')
                 ->with('message', 'editora não foi encontrado');
         }
-        return view('editoras.show', compact('editora'));
+        return view('editoras.show', compact('editoras'));
     }
 
     /**
@@ -87,10 +87,10 @@ class EditorasController extends Controller
         $editora = Editoras::find($id);
         if (!$editora) {
             return redirect()
-                ->route('editora.index')
+                ->route('editoras.index')
                 ->with('message', 'editora não foi encontrado');
         }
-        return view('editoras.edit', compact('editora'));
+        return view('editoras.edit', compact('editoras'));
     }
 
     /**
@@ -135,12 +135,12 @@ class EditorasController extends Controller
         $editora = Editoras::find($id);
         if (!$editora) {
             return redirect()
-                ->route('editora.index')
+                ->route('editoras.index')
                 ->with('message', 'editora não foi encontrado');
         }
         $editora->delete();
         return redirect()
-            ->route('editora.index')
+            ->route('editors.index')
             ->with('message', 'editora deletado');
     }
 }

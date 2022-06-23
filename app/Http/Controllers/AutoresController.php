@@ -16,17 +16,17 @@ class AutoresController extends Controller
      */
     public function index()
     {
-        $autoress = Autores::orderBy('titulo')->paginate(5);
-        return view('autoress.index', compact('autoress'));
+        $autores = Autores::orderBy('titulo')->paginate(5);
+        return view('autores.index', compact('autores'));
     }
 
     public function search(Request $request)
     {
         $filters = $request->except('_token');
-        $autoress = Autores::where('titulo', 'LIKE', "%request->search%")
+        $autor = Autores::where('titulo', 'LIKE', "%request->search%")
             ->orWhere('idioma', 'LIKE', "%request->search%")
             ->paginate(5);
-        return view('autoress.index', compact('autoress', 'filters'));
+        return view('autores.index', compact('autor', 'filters'));
     }
 
     /**
@@ -36,7 +36,7 @@ class AutoresController extends Controller
      */
     public function create()
     {
-        return view('autoress.create');
+        return view('autores.create');
     }
 
     /**
@@ -67,13 +67,13 @@ class AutoresController extends Controller
      */
     public function show($id)
     {
-        $autores = Autores::find($id);
-        if (!$autores) {
+        $autor = Autores::find($id);
+        if (!$autor) {
             return redirect()
                 ->route('autores.index')
-                ->with('message', 'autores não foi encontrado');
+                ->with('message', 'Autor não foi encontrado');
         }
-        return view('autoress.show', compact('autores'));
+        return view('autores.show', compact('autor'));
     }
 
     /**
@@ -84,13 +84,13 @@ class AutoresController extends Controller
      */
     public function edit($id)
     {
-        $autores = Autores::find($id);
-        if (!$autores) {
+        $autor = Autores::find($id);
+        if (!$autor) {
             return redirect()
                 ->route('autores.index')
-                ->with('message', 'autores não foi encontrado');
+                ->with('message', 'Autor não foi encontrado');
         }
-        return view('autoress.edit', compact('autores'));
+        return view('autores.edit', compact('autor'));
     }
 
     /**
@@ -102,23 +102,23 @@ class AutoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $autores = Autores::find($id);
-        if (!$autores) {
-            return redirect()->route('autoress.index')->with('message', 'autores não foi encontrado');
+        $autor = Autores::find($id);
+        if (!$autor) {
+            return redirect()->route('autores.index')->with('message', 'Autor não foi encontrado');
         }
         $data = $request->all();
         if (isset($request->capa) && $request->capa->isValid()) {
-            if (Storage::exists($autores->capa)) {
-                Storage::delete($autores->capa);
+            if (Storage::exists($autor->capa)) {
+                Storage::delete($autor->capa);
             }
 
             $nameFile = Str::of($request->isbn)->slug('-') . '.' . $request->capa->getClientOriginalExtension();
             $image = $request->capa->storeAs('autores', $nameFile);
             $data['capa'] = $image;
-            $autores->update($data);
-            return redirect()->route('autoress.index')->with('message', 'autores editado!');
+            $autor->update($data);
+            return redirect()->route('autores.index')->with('message', 'Autor editado!');
         }else {
-            return redirect()->route('autoress.index')->with('message', 'Arquivo de imagem invalido');
+            return redirect()->route('autores.index')->with('message', 'Arquivo de imagem invalido');
         }
 
 
@@ -132,15 +132,15 @@ class AutoresController extends Controller
      */
     public function destroy($id)
     {
-        $autores = Autores::find($id);
-        if (!$autores) {
+        $autor = Autores::find($id);
+        if (!$autor) {
             return redirect()
                 ->route('autores.index')
-                ->with('message', 'autores não foi encontrado');
+                ->with('message', 'Autor não foi encontrado');
         }
-        $autores->delete();
+        $autor->delete();
         return redirect()
             ->route('autores.index')
-            ->with('message', 'autores deletado');
+            ->with('message', 'Autor deletado');
     }
 }

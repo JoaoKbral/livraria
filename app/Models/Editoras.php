@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Editoras extends Model
 {
     use HasFactory;
+    protected $filableEditora = ['nome','local','email','capa'];
 }

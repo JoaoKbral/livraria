@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('local');
             $table->string('email');
+            $table->string('capa',256);
             $table->timestamps();
         });
     }

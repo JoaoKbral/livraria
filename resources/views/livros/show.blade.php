@@ -3,22 +3,22 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1 style="text-transform: capitalise;">{{ $editora->nome }}</h1>
 @stop
 
 @section('content')
-    <h1>Detalhes do livro {{ $livro->titulo }}</h1>
+    <h1>Detalhes do livro {{ $editora->nome }}</h1>
 
     <ul>
-        <li>ISBN: {{ $livro->isbn }}</li>
-        <li>Ano: {{ $livro->ano }}</li>
-        <li>Idioma: {{ $livro->idioma }}</li>
+        <li>ISBN: {{ $editora->isbn }}</li>
+        <li>Ano: {{ $editora->ano }}</li>
+        <li>Idioma: {{ $editora->idioma }}</li>
     </ul>
 
-    <form action="{{ route('livros.destroy', $livro->id) }}" method="post">
+    <form action="{{ route('livros.destroy', $editora->id) }}" method="post">
         @csrf
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit"> Deletar o livro {{ $livro->titulo }}</button>
+        <button type="submit"> Deletar o livro {{ $editora->nome }}</button>
     </form>
 @stop
 

@@ -25,10 +25,10 @@ Route::resource('livros', LivroController::class);
 Route::any('/livros/search',[LivroController::class,'search'])->name('livros.search');
 
 Route::resource('editoras',EditorasController::class);
-Route::any('/editoras/search',[EditorasController::class,'search'])->name('livros.search');
+Route::any('/editoras/search',[EditorasController::class,'search'])->name('editoras.search');
 
 Route::resource('autores',AutoresController::class);
-Route::any('/autores/search',[AutoresController::class,'search'])->name('livros.search');
+Route::any('/autores/search',[AutoresController::class,'search'])->name('autores.search');
 
 // Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
