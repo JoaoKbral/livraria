@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Livro;
 use App\Models\Midia;
+use App\Models\Editoras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -54,10 +55,15 @@ class LivroController extends Controller
             $nameFile = Str::of($request->isbn)->slug('-') . '.' . $request->capa->getClientOriginalExtension();
             $image = $request->capa->storeAs('livro', $nameFile);
             $data['capa'] = $image;
+            $tmp = Editoras::where('nome','=',$request->editora_id)->get();
+            if($tmp == null){
+                $editora= $tmp->first();
+                $data['editora_id']= $editora->id;
+            }
             Livro::create('$data');
-            return redirect()->route('livro.index');
+            return redirect()->route('livros.index');
         } else {
-            return redirect()->route('livro.index')->with('message', 'Arquivo de imagem invalido');
+            return redirect()->route('livros.index')->with('message', 'Arquivo de imagem invalido');
         }
     }
 
@@ -72,7 +78,7 @@ class LivroController extends Controller
         $livro = Livro::find($id);
         if (!$livro) {
             return redirect()
-                ->route('livro.index')
+                ->route('livros.index')
                 ->with('message', 'Livro não foi encontrado');
         }
         $midia= $livro->midia;
@@ -95,7 +101,7 @@ class LivroController extends Controller
         $livro = Livro::find($id);
         if (!$livro) {
             return redirect()
-                ->route('livro.index')
+                ->route('livros.index')
                 ->with('message', 'Livro não foi encontrado');
         }
         return view('livros.edit', compact('livro'));
@@ -143,12 +149,12 @@ class LivroController extends Controller
         $livro = Livro::find($id);
         if (!$livro) {
             return redirect()
-                ->route('livro.index')
+                ->route('livros.index')
                 ->with('message', 'Livro não foi encontrado');
         }
         $livro->delete();
         return redirect()
-            ->route('livro.index')
+            ->route('livros.index')
             ->with('message', 'Livro deletado');
     }
 }

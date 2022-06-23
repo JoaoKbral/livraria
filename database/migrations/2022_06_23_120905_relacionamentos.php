@@ -13,7 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        
+        Schema::table('livros', function(Blueprint $table){
+            $table->foreignId('editora_id')->constrained('editoras');
+        });
+
+        Schema::table('midias', function(Blueprint $table){
+            $table->foreignId('livro_id')->constrained('livros');
+        });
+
+        Schema::create('livros_editoras', function(Blueprint $table){
+            $table->id();
+            $table->foreignId('livro_id')->constrained('livros');
+            $table->foreignId('autores_id')->constrained('autores');
+        });
     }
 
     /**
@@ -23,6 +35,12 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('midias', function(Blueprint $table){
+            $table->dropForeign('livro_id');
+        });
+        Schema::table('livros', function(Blueprint $table){
+            $table->dropForeign('editora_id');
+        });
+        Schema::dropIfExists('livros_autores');
     }
 };

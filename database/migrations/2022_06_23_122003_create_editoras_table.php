@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome')->unique();
             $table->string('local');
-            $table->string('email');
-            $table->string('capa',256);
+            $table->string('site');
             $table->timestamps();
         });
     }

@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('editoras', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome')->unique();
-            $table->string('local');
-            $table->string('email');
-            $table->string('capa',256);
+            $table->string('comentario');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('editoras');
+        Schema::dropIfExists('comentarios');
     }
 };
