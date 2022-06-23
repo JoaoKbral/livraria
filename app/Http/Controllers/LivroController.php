@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livro;
+use App\Models\Midia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -73,6 +74,12 @@ class LivroController extends Controller
             return redirect()
                 ->route('livro.index')
                 ->with('message', 'Livro não foi encontrado');
+        }
+        $midia= $livro->midia;
+        if ($midia == null){
+            $midia =new Midia();
+            $midia ->nome='';
+            $midia -> descricao='';
         }
         return view('livros.show', compact('livro'));
     }

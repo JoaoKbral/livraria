@@ -9,4 +9,8 @@ class Livro extends Model
 {
     use HasFactory;
     protected $fillableLivro = ['titulo','idioma','ano','isbn', 'capa'];
+
+    public function midia(){
+        return $this->hasOne(Midia::class);
+    }
 }

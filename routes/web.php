@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutoresController;
 use App\Http\Controllers\EditorasController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\MidiaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,8 @@ Route::any('/editoras/search',[EditorasController::class,'search'])->name('edito
 
 Route::resource('autores',AutoresController::class);
 Route::any('/autores/search',[AutoresController::class,'search'])->name('autores.search');
+
+Route::resource('midias', MidiaController::class);
 
 // Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
